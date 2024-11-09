@@ -1,0 +1,47 @@
+C51 COMPILER V9.54   REG_RW                                                                05/25/2023 22:49:13 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE REG_RW
+OBJECT MODULE PLACED IN ..\obj\Reg_RW.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE ..\code\Reg_RW.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\code;..\user) DEBUG OB
+                    -JECTEXTEND PRINT(.\Reg_RW.lst) TABS(2) OBJECT(..\obj\Reg_RW.obj)
+
+line level    source
+
+   1          /*******************************************************
+   2          **  CPU: STC11L08XE
+   3          **  晶振：22.1184MHZ
+   4          **  波特率：9600 bit/S
+   5          **  延时口令模式： 即识别时都说“小杰”这个口令唤醒后，如果15秒内不进行语音识别则退出唤醒
+   6          /*********************************************************/
+   7          #include "config.h"
+   8          
+   9          #define LD_INDEX_PORT   (*((volatile unsigned char xdata*)(0x8100)))
+  10          #define LD_DATA_PORT    (*((volatile unsigned char xdata*)(0x8000)))
+  11          
+  12          void LD_WriteReg( unsigned char address, unsigned char dataout )
+  13          {
+  14   1        LD_INDEX_PORT  = address;
+  15   1        LD_DATA_PORT = dataout;
+  16   1      }
+  17          
+  18          unsigned char LD_ReadReg( unsigned char address )
+  19          {
+  20   1        LD_INDEX_PORT = address;
+  21   1        return (unsigned char)LD_DATA_PORT;
+  22   1      }
+  23          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     22    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
